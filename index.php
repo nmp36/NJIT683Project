@@ -1,78 +1,67 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" ID="HEY"  type="text/css"  href="theme.css" />
-        <title>.*</title>
-       <script type="text/javascript">
-function metaKeywords() {//alert('hey');
-    //alert(document.getElementsByName("content").item(1));
-//document.write(document.links.length);
-alert(document.getElementsBytagName('title'));
-//alert('hey');
-//for (i=0;i<metaCollection.length;i++) {
-//nameAttribute = metaCollection[i].name.search(/keywords/);
-//
-//if (nameAttribute!= -1) {
-//alert(metaCollection[i].content);
-//}
-//}
-}
-
-function test()
-{
-  //alert(document.getElementById("HEY"));
-  document.getElementById("HEY").href = "test.css";
-   //alert(document.getElementById("HEY").href);
-return; 
-
-}
-</script> 
+        <link rel="stylesheet" ID="cssFile" type="text/css" href="HelloWorldOrig.css" />
+        <link rel="Javascript" ID="jsFile" type="text/javascript" href="HelloWorldOrig.js" />
+        <title></title>
     </head>
-    <form   name="Form1" method="Post" Action="index.php">
-    <body onload="test();">
-        {subtitle}Subtitle of second paragraph{/subtitle}
-          <?php $rowtitles = array(1 => Pizza1, 2 => Pizza2, 3 => Pizza3)?>
-<!-- Display a row of checkboxes for each value in rowtitles -->
-<?php for($i=0; $i < sizeof($rowtitles); $i++) {?>
-<tr>
-<td><?php print $rowtitles[$i];?></td>
-<td><input name="pizza1[]" type="checkbox" value= "<?php echo  $rowtitles[$i];?>">"<?php echo  $rowtitles[$i];?>"</td>
-<td><input name="pizza2[]" type="checkbox" value= "<?php $rowtitles[$i]; ?>">"<?php echo  $rowtitles[$i];?>"</td>
-<td><input name="pizza3[]" type="checkbox" value= "<?php $rowtitles[$i] ?>">"<?php echo  $rowtitles[$i];?>"</td>
-</tr><br>
-<?php }?> 
-  
-      <?php include ("newPHPClass.php");  ?>
-       <?php  $value = "kem cho"; 
-         $test = new newPHPClass();
-          $value= $test->get_Name();
-          //echo $value;
-          $value = "kem cho";
-        //$value = $test->editBuffer('lond', 'meta');
-        echo $value;
-         echo "<H6>  $value";
+    <body>
+        <!-- Original H1 - H6 Values   -->
+        <h1>This is H1 Tag Orig. Val.</h1>
+        <h2>This is H2 Tag Orig. Val.</h2>
+        <h3>This is H3 Tag Orig. Val.</h3>
+        <h4>This is H4 Tag Orig. Val.</h4>
+        <h5>This is H5 Tag Orig. Val.</h5>
+        <h6>This is H6 Tag Orig. Val.</h6>
+        
+        
+        <?php include ("HTMLPHP.php");  ?>
+        <?php
+        $Main = new HTMLPHP();
+        $h1= $Main->get_H1();
+        $h2= $Main->get_H2();
+        $h3= $Main->get_H3();
+        $h4= $Main->get_H4();
+        $h5= $Main->get_H5();
+        $h6= $Main->get_H6();
+        $css=$Main->get_cssFile();
+        $js=$Main->get_jsFile();
+        
+        echo '<b>Server Function modified value of H1 - H6 Tags';
+        //echo $value;
+        echo "<h1> $h1";
+        echo "<h2> $h2";
+        echo "<h3> $h3";
+        echo "<h4> $h4";
+        echo "<h5> $h5";
+        echo "<h6> $h6";
+        
+        echo "<BR>CSS file name is modifield by server function : $css";
+        echo "<BR>JS file name is modifield by server function :  $js";
+        echo $js;
+        echo "<SCRIPT LANGUAGE='javascript'>getOrigFileName();</SCRIPT>";
+        echo "<SCRIPT LANGUAGE='javascript'>updateFileName();</SCRIPT>";
+        echo "<SCRIPT LANGUAGE='javascript'>getUpdatedFileName();</SCRIPT>";
         ?>
-         <?php
+       
+        <script type="text/javascript" >
+        function getsetFileName()
+        {
+        alert("Original CSS File :" + document.getElementById("cssFile").href);
+        alert("Original JS File : " + document.getElementById("jsFile").href);       
 
-    $var = $value;
-  
-    
-    ?>
-<?php
-// Define array.
-$cssFile = 'css2.css';
+        document.getElementById("cssFile").href = <?php echo "\"$css\"";?>;
+        document.getElementById("jsFile").href = <?php echo "\"$js\"";?>; 
 
-// use the variable sent from first.php. for example $css=1 and print that here.
-echo "<H4> $cssFile";
-echo '<link rel="stylesheet" type="text/css" href="' .$cssFile. '" />';
-?>
-
-
-<h1><?php echo  $var ?>
-     Name: <input type="submit" ID="HEY" name="fname"   value="<?php echo  $var ?>"/>
-     <input type="checkbox" name="vehicle" value="Bike" /><br />
+        alert("Update CSS File from server : " + document.getElementById("cssFile").href);
+        alert("Updated JS File from server : " + document.getElementById("jsFile").href);
+            
+           
+        }
+        
+        
+        </script>
+        <br>Click To Modify File Values: <input type="submit" ID="btnSubmit" name="fname" onClick="getsetFileName()"  value="Click"/>
     </body>
-    </form>
 </html>
